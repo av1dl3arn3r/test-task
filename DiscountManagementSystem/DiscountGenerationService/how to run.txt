@@ -1,0 +1,28 @@
+Just open a project in VS 2022 and run
+
+You need to create folders C:\Temp\7 and C:\Temp\8, plus have local MSSQLLocalDB available
+
+To test the gRPC connection run this:
+
+PS C:\Temp> ./grpcurl -import-path X:\your\path\to\DiscountManagementSystem\DiscountGenerationService\Protos\ -proto DiscountService.proto -d '{\"UserId\": \"a925774c-acf6-48c4-867a-6dd4ed70a602\", \"Count\": 10, \"Length\": 7}' localhost:5666 discount.DiscountServiceGRPC/GetDiscountCodes
+{
+  "Codes": [
+    "WEGFTK9",
+    "WEGFDNG",
+    "WEGFN74",
+    "WEGF7RT",
+    "WEGFTX0",
+    "WEGFNZM",
+    "WEGFLN2",
+    "WEGFLJ8",
+    "WEGFNKK",
+    "WEGFNFK"
+  ]
+}
+PS C:\Temp> ./grpcurl -import-path X:\your\path\to\DiscountManagementSystem\DiscountGenerationService\Protos\ -proto DiscountService.proto -d '{\"Code\": \"WEGFN74\"}' localhost:5666 discount.DiscountServiceGRPC/UseDiscountCode
+{
+  "Status": true
+}
+
+Please note that this implementation is not ideal, as I had a terrible lack of time, so my goal was to implement these 80% of functionality during 20% of time, and not the rest 20% of functionality during 80% of time. 
+I considered this task rather as a basis for further discussion than as a ready product to show.

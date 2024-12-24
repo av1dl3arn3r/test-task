@@ -1,0 +1,25 @@
+syntax = "proto3";
+package discount;
+
+service DiscountServiceGRPC {
+    rpc GetDiscountCodes(GetDiscountRequest) returns (GetDiscountReply);
+    rpc UseDiscountCode(UseDiscountRequest) returns (UseDiscountReply);
+}
+
+message GetDiscountRequest {
+    string UserId = 1;
+    uint32 Count = 2;
+    uint32 Length = 3;
+}
+
+message GetDiscountReply {
+    repeated string Codes = 1;
+}
+
+message UseDiscountRequest {
+    string Code = 1;
+}
+
+message UseDiscountReply {
+    bool Status = 1;
+}
